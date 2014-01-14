@@ -1,4 +1,4 @@
 blobfish
 ========
 
-A site about blobfish - I'm bored.
+Don't judge me
