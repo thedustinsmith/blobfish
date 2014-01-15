@@ -19,7 +19,6 @@ h1 {
   margin: 0;
   text-shadow: 7px 7px 0 black;
   font-family: 'Seymour One';
-  margin-top: 100px;
 }
 h2 {
   font-size: 24px;
@@ -27,25 +26,24 @@ h2 {
 h3 { 
   font-size: 32px;
 }
-#bg-img-wrap {
+.as-bg-wrap {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   z-index: -1;
 }
-#bg-img-wrap img {
-  height: 100%;
+.as-bg-wrap .as-bg-item {
   width: 100%;
+  height: 100%;
   opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-transition: all 1s linear;
+  -webkit-transition: opacity 1s linear;
 }
-#bg-img-wrap img.active {
+.as-bg-wrap .as-bg-item.active {
   opacity: 1;
-}
-#content-holder {
 }
 section {
   position: relative;
@@ -53,6 +51,7 @@ section {
 }
 section.header {
   text-align: center;
+  padding-top: 100px;
   margin: 0 auto;
 }
 section.header .section-inner {
@@ -66,3 +65,5 @@ section.right .section-inner {
   position: absolute;
   right: 0;
 }
+
+
