@@ -54,7 +54,6 @@ $.fn.animatedSections = function() {
         mid = (top + bottom) / 2;
 
     var perc = (mid - vidTop) / vidHeight;
-    console.log(dur, vidTop, vidHeight, top, bottom, mid, perc);
     activeVideo.currentTime = perc * dur;
   }
 
@@ -72,11 +71,9 @@ $.fn.animatedSections = function() {
       var winBottom = (top + $win.height())
           winMid = (top + winBottom) / 2;
 
-      //console.log(winBottom, winMid, this);
       var active = that.filter(function() {
         var thisTop = $(this).offset().top;
 
-        //console.log(dir, thisTop, this);
         if (dir === "down") {
           return thisTop < winMid && thisTop > top;
         }
