@@ -6,6 +6,10 @@ $.fn.animatedSections = function() {
   var $win = $(window),
       that = this,
       bgWrap = $(".as-bg-wrap");
+  var items = [];
+  var prevScroll = 0;
+  var activeVideo;
+  var activeSection;
 
   if (!bgWrap.length) {
     bgWrap = $("<div class='as-bg-wrap' />").prependTo($("body"));
@@ -20,19 +24,48 @@ $.fn.animatedSections = function() {
     return ix > -1;
   }
 
-  var items = [];
-  var prevScroll = 0;
   function winScroll () {
     var sTop = $win.scrollTop();
+    var dir = sTop > prevScroll ? "down" : "up";
+    var active = processScroll(sTop, dir);
 
-    var active = processScroll(sTop, sTop > prevScroll ? "down" : "up");
     prevScroll = sTop;
-
     if (active.length) {
-      console.log(active);
       bgWrap.find(".as-bg-item").removeClass("active");
-      active.data("as-bg").addClass("active");
+      var bgItem = active.data("as-bg").addClass("active");
+
+      activeSection = active;
+      if (bgItem.is('video')) {
+        processVideo(bgItem);
+      }
+      else {
+        stopVideo();
+      }
     }
+  }
+
+  function trackVideo () {
+    var dur = activeVideo.duration,
+        vidTop = activeSection.offset().top,
+        vidHeight= activeSection.height();
+
+    var top = $win.scrollTop(),
+        bottom = top + $win.height(),
+        mid = (top + bottom) / 2;
+
+    var perc = (mid - vidTop) / vidHeight;
+    console.log(dur, vidTop, vidHeight, top, bottom, mid, perc);
+    activeVideo.currentTime = perc * dur;
+  }
+
+  function stopVideo () {
+    $win.off('scroll', trackVideo);
+    activeVideo = undefined;
+  }
+
+  function processVideo (vid) {
+    activeVideo = vid[0];
+    $win.on('scroll', trackVideo);
   }
 
   function processScroll (top, dir) {
