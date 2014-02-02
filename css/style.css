@@ -42,6 +42,9 @@ h3 {
   top: 0;
   left: 0;
   -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -ms-transition: opacity 1s linear;
+  transition: opacity 1s linear;
 }
 .as-bg-wrap .as-bg-item.active {
   opacity: 1;
@@ -53,13 +56,14 @@ section {
 section.header {
   text-align: center;
   padding-top: 100px;
-  margin: 0 auto;
 }
 section.header .section-inner {
-  max-width: 100%;
+  width: 750px;
+  margin: 0 auto;
 }
 section .section-inner {
-  max-width: 400px;
+  width: 400px;
+  max-width: 85%;
 }
 section.right .section-inner {
   text-align: right;
